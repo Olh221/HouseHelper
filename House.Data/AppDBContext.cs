@@ -15,6 +15,8 @@ namespace House.Data
            : base(options)
         {
         }
+
+
         public DbSet<Order> Order { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<Feedback> Feedback { get; set; }
@@ -35,14 +37,9 @@ namespace House.Data
             new StatusrderEntityConfiguration().Configure(modelBuilder.Entity<Status>());
             new ServiceEntityConfiguration().Configure(modelBuilder.Entity<Service>());
 
-            modelBuilder.Entity<Order>().HasData(new Order { ID = 1, OrderDate = DateTime.Now });
-            modelBuilder.Entity<User>().HasData(new User { ID = 1, FirstName = "", LastName = "", PhoneNumber = "", Email = "", CompanyName = "" });
-            modelBuilder.Entity<Service>().HasData(new Service { ID = 1, ServiceName = "", ServicePrice = 1, Description = ""});
-            modelBuilder.Entity<Supplier>().HasData(new Supplier { ID = 1, SupplierOrders = null });
-            modelBuilder.Entity<Feedback>().HasData(new Feedback {ID = 1, Comment = "", Rate = 1 });
-            modelBuilder.Entity<Role>().HasData(new Role {ID = 1, Name = "" });
-            modelBuilder.Entity<SupplierOrder>().HasData(new SupplierOrder { ID = 1, OrderPrice = 1 });
-            modelBuilder.Entity<Status>().HasData(new Status {ID = 1, Name = "" });
+            modelBuilder.Entity<Role>().HasData(new List<Role> { new Role { ID = 1, Name = "Admin" }, new Role { ID = 2, Name = "User" } });
+            modelBuilder.Entity<User>().HasData(new User { ID = 1, PasswordHash = "dfdgg", FirstName = "Admin", LastName = "Admin", PhoneNumber = "6666666", Email = "admin.admin@admin.admin", CompanyName = "Admin", RoleID = 1 });
+            modelBuilder.Entity<Status>().HasData(new List<Status> { new Status { ID = 1, Name = "Paid" }, new Status { ID = 2, Name = "In work" }, new Status { ID = 3, Name = "Completed" } });
         }
     }
 }

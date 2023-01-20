@@ -12,28 +12,31 @@ namespace House.Data.Configuration
         public void Configure(EntityTypeBuilder<SupplierOrder> builder)
         {
             builder
-                .HasNoKey();
-            builder
-            .Property(i => i.Order)
-            .IsRequired();
+               .HasKey(e => e.ID);
 
             builder
-            .Property(i => i.Service)
-            .IsRequired();
+                .Property(e => e.OrderPrice)
+                .IsRequired();
 
             builder
-            .Property(e => e.Feedback)
-            .ValueGeneratedOnAdd()
-            .IsRequired();
+               .HasOne(p => p.Service)
+               .WithMany(b => b.SupplierOrders)
+               .HasForeignKey(p => p.ServiceID);
 
             builder
-            .Property(e => e.Status)
-            .ValueGeneratedOnAdd()
-            .IsRequired();
+               .HasOne(p => p.Order)
+               .WithMany(b => b.SupplierOrders)
+               .HasForeignKey(p => p.OrderID);
 
             builder
-            .Property(e => e.OrderPrice)
-            .HasColumnType("numeric").IsRequired();
+               .HasOne(p => p.Feedback)
+               .WithMany(b => b.SupplierOrders)
+               .HasForeignKey(p => p.FeedbackID);
+
+            builder
+               .HasOne(p => p.Status)
+               .WithMany(b => b.SupplierOrders)
+               .HasForeignKey(p => p.StatusID);
         }
     }
 }

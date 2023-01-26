@@ -9,34 +9,41 @@ using Microsoft.EntityFrameworkCore;
 
 namespace House.Services.Services
 {
-    public class UserServices : IUserServices
+    public class UserServices : IUserService
     {
         private readonly AppDBContext _context;
         public UserServices(AppDBContext context)
         {
             _context = context;
         }
-        public void Add(User user)
+
+        public Task Add(User user)
         {
             throw new NotImplementedException();
         }
-        public void Create(User user) 
+
+        public Task Delete(int id)
         {
             throw new NotImplementedException();
         }
-        public void Delete(User user)
-        {
-            throw new NotImplementedException();
-        }
-        public void GetById(User user)
-        {
-            throw new NotImplementedException();
-        }
+
         public async Task<IEnumerable<User>> GetAll()
         {
-            var result = await _context.User.ToListAsync();
+            var result = await _context.User.AsNoTracking().ToListAsync();
             return result;
         }
+
+        public Task<User> GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<User>> Update(User newUser)
+        {
+            var entity = await _context.User.FirstOrDefaultAsync(x => x.ID == newUser.ID);
+            entity.ID = newUser.ID;
+            await _context.SaveChangesAsync();
+            return (IEnumerable<User>)entity;
+        }
     }
-        // на кожну ентіті - ентіті.сервісб. метод -> , get, getbyid, create, update, delete
 }

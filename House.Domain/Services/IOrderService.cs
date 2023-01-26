@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace House.Domain.Services
 {
-    public interface IUserService
+    public interface IOrderService
     {
-        Task<IEnumerable<User>> GetAll();
-        Task<User> GetById(int id);
-        Task Add(User user);
-        Task<IEnumerable<User>> Update(User newUser);
+        Task<IEnumerable<Order>> GetAll();
+        Task<Order> GetById(int id);
+        Task Add(Order order);
+        Task<IEnumerable<Order>> Update(Order newOrder);
         Task Delete(int id);
     }
 }

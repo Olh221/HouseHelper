@@ -8,9 +8,9 @@ namespace WebAppHouseHelper.Controllers
 {
     public class UserControllers : Controller
     {
-        private readonly IUserServices _service;
+        private readonly IUserService _service;
 
-        public UserControllers(IUserServices service)
+        public UserControllers(IUserService service)
         {
             _service = service;
         }

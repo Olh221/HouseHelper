@@ -1,9 +1,6 @@
 ﻿using House.Domain.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace House.Data.Configuration
 {
@@ -12,19 +9,17 @@ namespace House.Data.Configuration
         public void Configure(EntityTypeBuilder<Supplier> builder)
         {
             builder
-             .HasKey(e => e.ID);
+                .HasKey(e => e.ID);
 
             builder
-             .Property(i => i.User)
-             .IsRequired();
+                .HasOne(p => p.Service)
+                .WithMany(b => b.Suppliers)
+                .HasForeignKey(p => p.ServiceID);
 
             builder
-             .Property(e => e.Service)
-             .IsRequired();
-
-            builder
-             .Property(e => e.Feedbacks)
-             .IsRequired();
+               .HasOne(p => p.User)
+               .WithMany(b => b.Suppliers)
+               .HasForeignKey(p => p.UserID);
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace House.Domain.Entities
 {
@@ -10,6 +6,7 @@ namespace House.Domain.Entities
     {
         public int ID { get; set; }
         public Supplier Supplier { get; set; }
+        public int SupplierID { get; set; }
         public int Rate { get; set; }
         public string Comment { get; set; }
         public ICollection<SupplierOrder> SupplierOrders { get; set; }

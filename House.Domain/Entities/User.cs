@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.Collections.Generic;
+
 
 namespace House.Domain.Entities
 {
@@ -13,9 +11,10 @@ namespace House.Domain.Entities
         public string PhoneNumber { get; set; }
         public string CompanyName { get; set; }
         public string Email { get; set; }
-        public Role Role { get; set; }
+        public string PasswordHash { get; set; }
+        public Role Role{ get; set; }
+        public int RoleID { get; set; }
         public ICollection<Order> Orders { get; set; }
         public ICollection<Supplier> Suppliers { get; set; }
-
     }
 }
